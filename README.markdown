@@ -1,7 +1,4 @@
-BetterGB
-========
-
-BetterGB is a chrome extension that makes the Google Bookmarks bookmarklet suck less. 
+s a chrome extension that makes the Google Bookmarks bookmarklet suck less.
 
 I think Google Bookmarks is a great service. It lets me bookmark everything, does full-text search on the bookmarked pages (so I don't have to tag if I don't feel like it) and integrates with google search. It's a real shame that Google has been neglecting this service for so long. After their latest UI redesign, the bookmarklet became borderline unusable. So I finally got fed up and decided to fix it.
 
@@ -17,7 +14,9 @@ Features
 Install
 -------
 
-[Click here](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-1.0.crx?raw=true "Click to install")
+[Click here to install](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-1.0.crx?raw=true "Click to install")
+
+To configure extension options, go to the [Chrome extensions](chrome://settings/extensions) page and click options next to the BetterGB extension.
 
 Feature Requests
 ----------------
