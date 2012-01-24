@@ -1,0 +1,20 @@
+* Make options page actually work
+* Add these options
+ - Hide cancel button
+ - Hide "see all bookmarks" button
+ - Hide bottom links bar
+ - Hide top bar (already hidden but should be customizable)
+ - Autosubmit
+ - Focus submit button to start
+ - Include "notes" field in tab order
+ - Hide "notes" field
+ - Custom color for highlighting selected tag autocomplete
+ - Custom padding width
+ - "minimal" option that does most of these
+ - Some options should be on by default
+ - Post form on enter (no need to tab to "Submit" button)
+* Email this out to some blogs?
+* Make options page look nicer
+* Add link to github page from bookmarklet screen
+* Test autoupdating of extension
+* Post to reddit

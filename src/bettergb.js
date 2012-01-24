@@ -1,6 +1,6 @@
 $(document).ready(function(){
   
-var selector = "input:visible,a.kd-button-submit:visible"
+var selector = "input:visible,a.kd-button-submit"
     tabindex = 1,
     count = $(selector).length;
 
@@ -24,6 +24,14 @@ $(document).keyup(function(e) {
     window.close();
   }
 });
+
+$('a.kd-button-submit').on('keydown', function(e){
+  if((e.keyCode || e.which) == 13) /* simulate button click on enter */
+  {
+    $(this).click();
+  }
+});
+
 
 
 });
