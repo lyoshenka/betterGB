@@ -1,0 +1,25 @@
+body
+{
+  padding: 20px !important;
+}
+#gb
+{
+  display: none !important;
+}
+body > div
+{
+  /*visibility:hidden !important;*/ /* hide bottom bar */
+}
+#ac-list
+{
+  visibility:visible !important;
+}
+#ac-list .selected
+{
+  background-color: #D4D4D4 !important;
+}
+
+table tr:last-of-type td div:last-child
+{
+  /*display:none !important;*/ 
+}

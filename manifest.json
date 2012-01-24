@@ -1,0 +1,13 @@
+{
+  "name": "BetterGB",
+  "version": "1.0",
+  "description": "Make the Google Bookmarks bookmarklet popup useful. Remove extraneous UI elements, fix tabindex, and much more.",
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["*://www.google.com/bookmarks/mark*"], 
+      "js": ["jquery.min.js", "bettergb.js"],
+      "css" : ["bettergb.css"]
+    }
+  ]
+}

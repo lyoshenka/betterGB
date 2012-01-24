@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>BetterGB Options</title>
+  <script src="jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  var form = $(this).find('form');
+
+  /* load data from localstorage into form here */
+
+  $(this).find('input[type="submit"]').on("click", function(e) {
+    e.preventDefault();
+
+    localStorage['close_on_esc'] = $(this).siblings('input[name="close_on_esc"]').attr('checked') == 'checked';
+    $('#saved').show().fadeOut(850);
+  });
+});
+
+</script>
+
+<h1>BetterGB Options</h1>
+
+<form>
+
+<input type="checkbox" name="close_on_esc" /> Esc closes popup<br />
+<br />
+<input type="submit" value="Save" />
+<span id="saved" style="color:green; display:none" >Saved!</span>
+</form>
+
+</body>
+</html>
