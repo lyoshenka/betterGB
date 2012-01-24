@@ -1,3 +1,6 @@
+* Add script to automate updates
+* Minify css/js?
+
 * Add these options
  - Hide "see all bookmarks" button
  - Hide bottom links bar
@@ -10,8 +13,10 @@
  - Custom padding width
  - "minimal" option that does most of these
  - Post form on enter (no need to tab to "Submit" button)
+
+* Add several "use types" that configure multiple options: one-click submit, simple, full (with-notes). 
+
 * Email this out to some blogs?
 * Make options page look nicer
 * Add link to github page from bookmarklet screen
-* Test autoupdating of extension
 * Post to reddit

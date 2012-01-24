@@ -24,4 +24,4 @@ To configure extension options, go to the Chrome extensions page (chrome://setti
 Feature Requests
 ----------------
 
-Want something that this extension doesn't do yet? File an issue, submit a pull request, or shoot me a message.
+Is there something you wish the bookmarklet did that it doesn't do right now? File an issue, submit a pull request, or shoot me a message. I'm usually pretty responsive.
