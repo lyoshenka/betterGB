@@ -17,7 +17,7 @@ Features
 Install
 -------
 
-Coming soon
+[Click here](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-1.0.crx?raw=true "Click to install")
 
 Feature Requests
 ----------------
