@@ -1,0 +1,26 @@
+<html>
+<script>
+options = {
+  'close_on_esc': true,
+  'hide_cancel_button': true
+};
+
+/* load defaults into local storage */
+if(!localStorage['defaults_loaded'])
+{
+  for (option in options)
+  {
+    localStorage[option] = options[option];
+  }
+  localStorage['defaults_loaded'] = true;
+}
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+  if (request.method == "getOptions")
+    sendResponse({"options": localStorage});
+  else
+    sendResponse({}); // snub them.
+});
+
+</script>
+</html>

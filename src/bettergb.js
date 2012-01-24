@@ -1,39 +1,55 @@
-$(document).ready(function(){
+betterGB = function(options) {
+  /* options is the extension's localStorage */
+  var selector = "input:visible,a.kd-button-submit"
+      tabindex = 1,
+      count = $(selector).length;
+
+  $(selector).each(function() {
+    $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
+    tabindex++;
+    $(this).on('keydown', function(e) {
+      if ((e.keyCode || e.which) == 9)  /* hijack tab key and only tab through the elements we care about */
+      {
+        e.preventDefault();
+        tindex = $(this).attr('data-tindex') % count + 1;
+        $('*[data-tindex=' + tindex + ']').focus();
+      }
+    });
+  });
   
-var selector = "input:visible,a.kd-button-submit"
-    tabindex = 1,
-    count = $(selector).length;
+  if (options['close_on_esc'])
+  {
+    $(document).keyup(function(e) {
+      if((e.keyCode || e.which) == 27) /* close popup on esc key */
+      {
+        window.close();
+      }
+    });
+  }
 
 
-$(selector).each(function() {
-  $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
-  tabindex++;
-  $(this).on('keydown', function(e) {
-    if ((e.keyCode || e.which) == 9)  /* hijack tab key and only tab through the elements we care about */
+  $('a.kd-button-submit').on('keydown', function(e){
+    if((e.keyCode || e.which) == 13) /* simulate button click on enter */
     {
-      e.preventDefault();
-      tindex = $(this).attr('data-tindex') % count + 1;
-      $('*[data-tindex=' + tindex + ']').focus();
+      $(this).click();
     }
   });
-});
-
-$(document).keyup(function(e) {
-  if((e.keyCode || e.which) == 27) /* close popup on esc key */
+  
+  if (options['hide_cancel_button'])
   {
-    window.close();
+    $('a.kd-button').each(function(){
+      if ($(this).text() == "Cancel")
+      {
+        $(this).hide();
+      }
+    });
   }
+
+};
+
+
+$(document).ready(function(){
+  chrome.extension.sendRequest({method: "getOptions"}, function(response) {
+      betterGB(response.options);
+  });
 });
-
-$('a.kd-button-submit').on('keydown', function(e){
-  if((e.keyCode || e.which) == 13) /* simulate button click on enter */
-  {
-    $(this).click();
-  }
-});
-
-
-
-});
-
-/* autosubmit, focus submit, tab into notes, color for highlight, add options to selectively hide different elements*/

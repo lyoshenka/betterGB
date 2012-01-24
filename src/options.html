@@ -7,14 +7,46 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-  var form = $(this).find('form');
+  var form = $(this).find('form'),
+      options = chrome.extension.getBackgroundPage().options;
 
-  /* load data from localstorage into form here */
+  /* load saved options into form*/
+  $.each(options,function(option,defaultValue) {
+    var value = localStorage.getItem(option) === null ? defaultValue : localStorage[option];
+    input = $('#'+option);
+    if (!input)
+    {
+      console.log('Did not find input ' + option);
+    }
+    if (input.attr('type') == 'checkbox')
+    {
+      console.log('Option is a checkox');
+      input.attr('checked', value == 'true');
+    }
+    else
+    {
+      console.log('Not a checkbox');
+      input.val(value);
+    }
+  });
 
-  $(this).find('input[type="submit"]').on("click", function(e) {
+
+  /* save options */
+  $('#submit').click(function(e) {
     e.preventDefault();
 
-    localStorage['close_on_esc'] = $(this).siblings('input[name="close_on_esc"]').attr('checked') == 'checked';
+    $.each(options, function(option,defaultValue) {
+      input = $('#'+option);
+      if (input.attr('type') == 'checkbox')
+      {
+        localStorage[option] = input.attr('checked') == 'checked';
+      }
+      else
+      {
+        localStorage[option] = input.val();
+      }
+    });
+
     $('#saved').show().fadeOut(850);
   });
 });
@@ -25,9 +57,10 @@ $(document).ready(function() {
 
 <form>
 
-<input type="checkbox" name="close_on_esc" /> Esc closes popup<br />
+<input type="checkbox" id="close_on_esc" /><label for='close_on_esc'>Esc closes popup</label><br />
+<input type="checkbox" id="hide_cancel_button" /><label for='hide_cancel_button'>Hide Cancel button</label><br />
 <br />
-<input type="submit" value="Save" />
+<input type="submit" id="submit" value="Save" />
 <span id="saved" style="color:green; display:none" >Saved!</span>
 </form>
 

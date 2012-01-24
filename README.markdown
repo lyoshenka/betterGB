@@ -14,7 +14,7 @@ Features
 Install
 -------
 
-[Click here to install](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-1.0.crx?raw=true "Click to install")
+[Click here to install](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-1.1.crx?raw=true "Click to install")
 
 To configure extension options, go to the [Chrome extensions](chrome://settings/extensions) page and click options next to the BetterGB extension.
 
