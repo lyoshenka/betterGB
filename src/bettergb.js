@@ -4,7 +4,7 @@ betterGB = function(options) {
       tabindex = 1,
       count = $(selector).length;
 
-  window.resizeTo(600,450); /* should be configurable? should depend on content? */
+//  window.resizeTo(600,450); /* should be configurable? should depend on content? */
 
   $(selector).each(function() {
     $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
