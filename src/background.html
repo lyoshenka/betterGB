@@ -2,7 +2,12 @@
 <script>
 options = {
   'close_on_esc': true,
-  'hide_cancel_button': true
+  'submit_on_enter': true,
+
+  'hide_top_bar': true,
+  'hide_cancel_button': true,
+  'hide_all_bookmarks_button': true,
+  'hide_bottom_links': true
 };
 
 /* load defaults into local storage */
@@ -19,7 +24,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   if (request.method == "getOptions")
     sendResponse({"options": localStorage});
   else
-    sendResponse({}); // snub them.
+    sendResponse({});
 });
 
 </script>

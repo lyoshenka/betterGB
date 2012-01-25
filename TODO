@@ -1,11 +1,6 @@
-* Add script to automate updates
-* Minify css/js?
-
 * Add these options
- - Hide "see all bookmarks" button
  - Hide bottom links bar
  - Hide top bar (already hidden but should be customizable)
- - Autosubmit
  - Focus submit button to start
  - Include "notes" field in tab order
  - Hide "notes" field
