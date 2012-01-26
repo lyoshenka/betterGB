@@ -5,6 +5,10 @@ betterGB = function(options) {
 
 //  window.resizeTo(600,450); /* should be configurable? should depend on content? */
 
+//
+// Bind Keys
+//
+
   if(options['submit_on_enter'])
   {
     $('form').keydown(function(e) {
@@ -26,7 +30,22 @@ betterGB = function(options) {
   });
 
 
-  // fix tabindex
+  if (options['close_on_esc'])
+  {
+    $(document).keydown(function(e) {
+      if((e.keyCode || e.which) == 27) /* close popup on esc key */
+      {
+        window.close();
+      }
+    });
+  }
+
+
+
+//
+// Fix Tabindex
+//
+
   $(selector).each(function() {
     $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
     tabindex++;
@@ -41,21 +60,11 @@ betterGB = function(options) {
     });
   });
   
-  if (options['close_on_esc'])
-  {
-    $(document).keydown(function(e) {
-      if((e.keyCode || e.which) == 27) /* close popup on esc key */
-      {
-        window.close();
-      }
-    });
-  }
 
 
-/*
- * Hide UI Elements
- */
-
+//
+// Hide UI Elements
+//
   if (options['hide_top_bar'])
   {
     $('#gb').hide();
@@ -76,12 +85,22 @@ betterGB = function(options) {
   {
     $('form').next('div').next('div').hide();
   }
+
+
+
+//
+// Insert Options Link
+//
+  $(document.createElement('a'))
+    .attr('href', chrome.extension.getURL('options.html'))
+    .text('BetterGB Options')
+//    .css('float': 'left')
+    .insertAfter('body > form');
+
 };
 
 
 
-$(document).ready(function(){
-  chrome.extension.sendRequest({method: "getOptions"}, function(response) {
-      betterGB(response.options);
-  });
+chrome.extension.sendRequest({method: "getOptions"}, function(response) {
+  betterGB(response.options);
 });

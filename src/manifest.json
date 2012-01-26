@@ -10,7 +10,7 @@
       "matches": ["*://www.google.com/bookmarks/mark*"], 
       "js": ["jquery.min.js", "bettergb.js"],
       "css": ["bettergb.css"],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ]
 }
