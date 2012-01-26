@@ -1,11 +1,32 @@
 betterGB = function(options) {
-  /* options is the extension's localStorage */
   var selector = "input:visible,a.kd-button-submit"
       tabindex = 1,
       count = $(selector).length;
 
 //  window.resizeTo(600,450); /* should be configurable? should depend on content? */
 
+  if(options['submit_on_enter'])
+  {
+    $('form').keydown(function(e) {
+      var aclist = $('#ac-list');
+      if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty'))) // and target is not a textarea
+      {
+        e.preventDefault(); // is this line necessary?
+        $('a.kd-button-submit').click();
+      }
+    });
+  }
+
+  // always submit if enter is pressed on submit button
+  $('a.kd-button-submit').keydown(function(e){
+    if((e.keyCode || e.which) == 13) /* simulate button click on enter */
+    {
+      $(this).click();
+    }
+  });
+
+
+  // fix tabindex
   $(selector).each(function() {
     $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
     tabindex++;
@@ -17,26 +38,9 @@ betterGB = function(options) {
         if (tindex < 1) tindex += count; // loop around backwards
         $('*[data-tindex=' + tindex + ']').focus();
       }
-
-/*      if (options['submit_on_enter'] && (e.keyCode || e.which) == 13)
-      {
-        console.log('caught enter');
-        e.preventDefault();
-        $('kd-button-submit').click(); // should this be form.submit() ?? 
-      }*/
     });
   });
   
-/*  if (options['submit_on_enter'])
-  {
-    $('form').on('keydown',function(e) {
-      if ((e.keyCode || e.which) == 13)
-      {
-        document.add_bkmk_form.onsubmit() && document.add_bkmk_form.submit(); // from the submit button's onclick
-      }
-    });
-  }*/
-
   if (options['close_on_esc'])
   {
     $(document).keydown(function(e) {
@@ -46,14 +50,6 @@ betterGB = function(options) {
       }
     });
   }
-
-
-  $('a.kd-button-submit').keydown(function(e){
-    if((e.keyCode || e.which) == 13) /* simulate button click on enter */
-    {
-      $(this).click();
-    }
-  });
 
 
 /*

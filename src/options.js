@@ -1,10 +1,8 @@
 $(document).ready(function() {
-  var options = chrome.extension.getBackgroundPage().options;
-
+  var options = chrome.extension.getBackgroundPage().getOptions();
 
   /* load saved options into form*/
-  $.each(options,function(option,defaultValue) {
-    var value = localStorage.getItem(option) === null ? defaultValue : localStorage[option];
+  $.each(options,function(option,value) {
     input = $('#'+option);
     if (!input)
     {
@@ -13,7 +11,7 @@ $(document).ready(function() {
     if (input.attr('type') == 'checkbox')
     {
       console.log('Option is a checkox');
-      input.attr('checked', value == 'true');
+      input.attr('checked', value);
     }
     else
     {
@@ -28,7 +26,7 @@ $(document).ready(function() {
   $('#submit').click(function(e) {
     e.preventDefault();
 
-    $.each(options, function(option,defaultValue) {
+    $.each(options, function(option,value) {
       input = $('#'+option);
       if (input.attr('type') == 'checkbox')
       {
