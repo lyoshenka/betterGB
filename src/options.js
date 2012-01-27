@@ -6,7 +6,7 @@ $(document).ready(function() {
     input = $('#'+option);
     if (!input)
     {
-      console.log('Did not find input ' + option);
+      return;
     }
     if (input.attr('type') == 'checkbox')
     {
@@ -28,6 +28,10 @@ $(document).ready(function() {
 
     $.each(options, function(option,value) {
       input = $('#'+option);
+      if (!input)
+      {
+        return;
+      {
       if (input.attr('type') == 'checkbox')
       {
         localStorage[option] = input.attr('checked') == 'checked';

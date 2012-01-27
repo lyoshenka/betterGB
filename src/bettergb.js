@@ -4,9 +4,13 @@ betterGB = function(options) {
       tabindex = 1,
       count = $(tabElements).length;
 
-//  window.resizeTo(600,450); /* should be configurable? should depend on content? */
-
-  _gaq.push(['_trackEvent', 'Opened']);
+//
+// Instantiate analytics queue
+//
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28704123-1'],
+            //['_trackPageview'],
+            ['_trackEvent', 'Opened']);
 
 //
 // Bind Keys
@@ -19,9 +23,10 @@ betterGB = function(options) {
       if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty')) && !$(e.target).is('textarea'))
       {
         e.preventDefault(); // is this line necessary?
-        //_gaq.push(['_trackEvent', 'Submit: enter']);
+        _gaq.push(['_trackEvent', 'Submit: enter']);
         $(submitButton).click();
       }
+      return true;
     });
   }
 
@@ -32,6 +37,7 @@ betterGB = function(options) {
       _gaq.push(['_trackEvent', 'Submit: enter on button']);
       $(this).click();
     }
+    return true;
   });
 
   $(submitButton).click(function(e) {
@@ -111,6 +117,15 @@ betterGB = function(options) {
 //    .css('float': 'left')
     .insertAfter('body > form');
 
+
+//
+// Analytics
+//
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 };
 
 
