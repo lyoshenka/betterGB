@@ -1,9 +1,12 @@
 betterGB = function(options) {
-  var selector = "input:visible,a.kd-button-submit"
+  var submitButton = 'a.kd-button-submit',
+      tabElements = 'input:visible,' + submitButton,
       tabindex = 1,
-      count = $(selector).length;
+      count = $(tabElements).length;
 
 //  window.resizeTo(600,450); /* should be configurable? should depend on content? */
+
+  _gaq.push(['_trackEvent', 'Opened']);
 
 //
 // Bind Keys
@@ -13,20 +16,30 @@ betterGB = function(options) {
   {
     $('form').keydown(function(e) {
       var aclist = $('#ac-list');
-      if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty'))) // and target is not a textarea
+      if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty')) && !$(e.target).is('textarea'))
       {
         e.preventDefault(); // is this line necessary?
-        $('a.kd-button-submit').click();
+        //_gaq.push(['_trackEvent', 'Submit: enter']);
+        $(submitButton).click();
       }
     });
   }
 
   // always submit if enter is pressed on submit button
-  $('a.kd-button-submit').keydown(function(e){
-    if((e.keyCode || e.which) == 13) /* simulate button click on enter */
+  $(submitButton).keydown(function(e) {
+    if((e.keyCode || e.which) == 13)
     {
+      _gaq.push(['_trackEvent', 'Submit: enter on button']);
       $(this).click();
     }
+  });
+
+  $(submitButton).click(function(e) {
+    if(e.hasOwnProperty('originalEvent'))
+    {
+      _gaq.push(['_trackEvent', 'Submit: click']);
+    }
+    return true;
   });
 
 
@@ -35,6 +48,7 @@ betterGB = function(options) {
     $(document).keydown(function(e) {
       if((e.keyCode || e.which) == 27) /* close popup on esc key */
       {
+        _gaq.push(['_trackEvent', 'Close via esc']);
         window.close();
       }
     });
@@ -46,7 +60,7 @@ betterGB = function(options) {
 // Fix Tabindex
 //
 
-  $(selector).each(function() {
+  $(tabElements).each(function() {
     $(this).attr('data-tindex', tabindex).attr('tabindex', tabindex); /* set our own tabindex */
     tabindex++;
     $(this).keydown(function(e) {
@@ -59,7 +73,7 @@ betterGB = function(options) {
       }
     });
   });
-  
+
 
 
 //

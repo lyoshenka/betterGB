@@ -1,34 +1,47 @@
+<!DOCTYPE html>
 <html>
-<script>
+<head></head>
+<body><script>
 
-getOptions = function() {
-  var _options = {
-    'close_on_esc': true,
-    'submit_on_enter': true,
+  getOptions = function() {
+    var _options = {
+      'close_on_esc': true,
+      'submit_on_enter': true,
 
-    'hide_top_bar': true,
-    'hide_cancel_button': true,
-    'hide_all_bookmarks_button': true,
-    'hide_bottom_links': false
+      'hide_top_bar': true,
+      'hide_cancel_button': true,
+      'hide_all_bookmarks_button': true,
+      'hide_bottom_links': false
+    };
+
+    for (var option in _options) {
+      if (localStorage.getItem(option) !== null) {
+        console.log(localStorage[option]);
+        _options[option] = localStorage[option] === 'true' ? true : (localStorage[option] === 'false' ? false : localStorage[option]);
+      }
+    }
+
+    return _options;
   };
 
-  for (var option in _options) {
-    if (localStorage.getItem(option) !== null) {
-      console.log(localStorage[option]);
-      _options[option] = localStorage[option] === 'true' ? true : (localStorage[option] === 'false' ? false : localStorage[option]);
-    }
-  }
 
-  return _options;
-};
+  chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getOptions")
+      sendResponse({"options": getOptions()});
+    else
+      sendResponse({});
+  });
 
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-  if (request.method == "getOptions")
-    sendResponse({"options": getOptions()});
-  else
-    sendResponse({});
-});
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28704123-1']);
+  _gaq.push(['_trackPageview']);
 
-</script>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body>
 </html>
