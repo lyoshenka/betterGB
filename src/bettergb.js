@@ -2,17 +2,23 @@ betterGB = function(options) {
   var submitButton = 'a.kd-button-submit',
       tabElements = 'input:visible,' + submitButton,
       tabindex = 1,
-      count = $(tabElements).length;
+      count = $(tabElements).length,
+      extensionId = 'lkihgbnjeomjkfgdkimldpipggffikjo',
+      analyticsId = 'UA-28704123-1',
+      dev = chrome.i18n.getMessage('@@extension_id') == extensionId, // true if developing, false if installed for real
 
-console.log(chrome.i18n.getMessage('@@extension_id'));
+      gaqEvent = function(mesg) {
+        if (!dev) _gaq.push(['_trackEvent', mesg]);
+      };
 
 //
 // Instantiate analytics queue
 //
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-28704123-1'],
-            //['_trackPageview'],
-            ['_trackEvent', 'Opened']);
+  if (!dev)
+  {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', analyticsId], /*['_trackPageview'],*/ ['_trackEvent', 'Opened']);
+  }
 
 //
 // Bind Keys
@@ -25,7 +31,7 @@ console.log(chrome.i18n.getMessage('@@extension_id'));
       if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty')) && !$(e.target).is('textarea'))
       {
         e.preventDefault(); // is this line necessary?
-        _gaq.push(['_trackEvent', 'Submit: enter']);
+        gaqEvent('Submit: enter');
         $(submitButton).click();
       }
       return true;
@@ -36,7 +42,7 @@ console.log(chrome.i18n.getMessage('@@extension_id'));
   $(submitButton).keydown(function(e) {
     if((e.keyCode || e.which) == 13)
     {
-      _gaq.push(['_trackEvent', 'Submit: enter on button']);
+      gaqEvent('Submit: enter on button');
       $(this).click();
     }
     return true;
@@ -45,7 +51,7 @@ console.log(chrome.i18n.getMessage('@@extension_id'));
   $(submitButton).click(function(e) {
     if(e.hasOwnProperty('originalEvent'))
     {
-      _gaq.push(['_trackEvent', 'Submit: click']);
+      gaqEvent('Submit: click');
     }
     return true;
   });
@@ -56,7 +62,7 @@ console.log(chrome.i18n.getMessage('@@extension_id'));
     $(document).keydown(function(e) {
       if((e.keyCode || e.which) == 27) /* close popup on esc key */
       {
-        _gaq.push(['_trackEvent', 'Close via esc']);
+        gaqEvent('Close via esc');
         window.close();
       }
     });
@@ -123,11 +129,14 @@ console.log(chrome.i18n.getMessage('@@extension_id'));
 //
 // Analytics
 //
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+  if (!dev) 
+  {
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = 'https://ssl.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  }
 };
 
 
