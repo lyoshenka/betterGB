@@ -4,6 +4,8 @@ betterGB = function(options) {
       tabindex = 1,
       count = $(tabElements).length;
 
+console.log(chrome.i18n.getMessage('@@extension_id'));
+
 //
 // Instantiate analytics queue
 //
