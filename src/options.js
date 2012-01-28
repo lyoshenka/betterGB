@@ -31,7 +31,7 @@ $(document).ready(function() {
       if (!input)
       {
         return;
-      {
+      }
       if (input.attr('type') == 'checkbox')
       {
         localStorage[option] = input.attr('checked') == 'checked';
