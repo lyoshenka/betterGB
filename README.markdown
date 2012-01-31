@@ -9,8 +9,9 @@ Features
 --------
 
 * Improves highlighting of selected autocomplete choice for tag
-* Removes extraneous UI stuff
+* Removes extraneous UI elements (configurable)
 * Fixes the tabindex so you only tab through the fields you want (name, location, labels, add bookmark)
+* Save bookmark by pressing Enter (the way it used to work before the redesign)
 * Close popup by pressing Esc
 * Options can turn many of these features on or off
 
@@ -19,7 +20,7 @@ Install
 
 [Click here to install](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-11.crx?raw=true "Click to install")
 
-To configure extension options, go to the Chrome extensions page (chrome://settings/extensions) and click options next to the BetterGB extension.
+To configure extension options, open the Google bookmarklet and click "BetterGB Options" in the bottom-left corner.
 
 Feature Requests
 ----------------
