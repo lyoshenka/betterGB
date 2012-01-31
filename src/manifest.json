@@ -1,6 +1,6 @@
 {
   "name": "BetterGB",
-  "version": "9",
+  "version": "10",
   "description": "Make the Google Bookmarks bookmarklet suck less. Remove extraneous UI elements, fix tabindex, and much more.",
   "update_url": "https://raw.github.com/lyoshenka/betterGB/master/updates.xml",
   "background_page": "background.html",

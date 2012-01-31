@@ -5,7 +5,7 @@ betterGB = function(options) {
       count = $(tabElements).length,
       extensionId = 'lkihgbnjeomjkfgdkimldpipggffikjo',
       analyticsId = 'UA-28704123-1',
-      dev = chrome.i18n.getMessage('@@extension_id') == extensionId, // true if developing, false if installed for real
+      dev = chrome.i18n.getMessage('@@extension_id') != extensionId, // true if developing, false if installed for real
 
       gaqEvent = function(mesg) {
         if (!dev) _gaq.push(['_trackEvent', mesg]);
@@ -16,8 +16,9 @@ betterGB = function(options) {
 //
   if (!dev)
   {
+    console.log('not dev');
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', analyticsId], /*['_trackPageview'],*/ ['_trackEvent', 'Opened']);
+    _gaq.push(['_setAccount', analyticsId], ['_trackPageview'], ['_trackEvent', 'Opened']);
   }
 
 //
