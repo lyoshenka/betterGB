@@ -4,22 +4,13 @@ betterGB = function(options) {
       tabindex = 1,
       count = $(tabElements).length,
       extensionId = 'lkihgbnjeomjkfgdkimldpipggffikjo',
-      analyticsId = 'UA-28704123-1',
       dev = chrome.i18n.getMessage('@@extension_id') != extensionId, // true if developing, false if installed for real
+      analyticsId = dev ? 'UA-28704123-2' : 'UA-28704123-1',
 
       gaqEvent = function(mesg) {
-        if (!dev) _gaq.push(['_trackEvent', mesg]);
+        _gaq.push(['_trackEvent', mesg]);
       };
 
-//
-// Instantiate analytics queue
-//
-  if (!dev)
-  {
-    console.log('not dev');
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', analyticsId], ['_setDomainName', 'none'], ['_trackPageview'], ['_trackEvent', 'Opened']);
-  }
 
 //
 // Bind Keys
@@ -127,17 +118,13 @@ betterGB = function(options) {
     .insertAfter('body > form');
 
 
+
 //
 // Analytics
 //
-  if (!dev) 
-  {
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = 'https://ssl.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  }
+
+//gaTrack(analyticsId, 'none', '/bettergb.js');
+
 };
 
 
