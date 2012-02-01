@@ -18,7 +18,7 @@ Features
 Install
 -------
 
-[Click here to install](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-11.crx?raw=true "Click to install")
+[**Click here to install**](https://github.com/lyoshenka/betterGB/blob/master/release/bettergb-11.crx?raw=true "Click to install")
 
 To configure extension options, open the Google bookmarklet and click "BetterGB Options" in the bottom-left corner.
 
