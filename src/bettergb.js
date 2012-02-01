@@ -18,7 +18,7 @@ betterGB = function(options) {
   {
     console.log('not dev');
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', analyticsId], ['_trackPageview'], ['_trackEvent', 'Opened']);
+    _gaq.push(['_setAccount', analyticsId], ['_setDomainName', 'none'], ['_trackPageview'], ['_trackEvent', 'Opened']);
   }
 
 //

@@ -30,6 +30,8 @@
   chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if (request.method == "getOptions")
       sendResponse({"options": getOptions()});
+//    else if (request.method == "getGa")
+//      sendResponse({"ga": '');
     else
       sendResponse({});
   });
