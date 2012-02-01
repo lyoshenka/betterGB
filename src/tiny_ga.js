@@ -47,7 +47,6 @@ function tiny_ga(propertyId, domain, url, uniqueVisitorId) {
 //__utma=<domain hash>.<unique visitor id>.<timstamp of first visit>.<timestamp of previous (most recent) visit>.<timestamp of current visit>.<visit count> 
 
 
-  console.log(imgUrl);
   // trigger the tracking
   img.src = imgUrl;
 }
