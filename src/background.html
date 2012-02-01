@@ -18,9 +18,15 @@
 
     for (var option in _options) {
       if (localStorage.getItem(option) !== null) {
-        console.log(localStorage[option]);
         _options[option] = localStorage[option] === 'true' ? true : (localStorage[option] === 'false' ? false : localStorage[option]);
       }
+    }
+
+    _options['_uid'] = localStorage['_uid'];
+    if (!_options['_uid'])
+    {
+      _options['_uid'] = 1e9 + Math.floor(Math.random() * (-(1<<31) - 1e9)); // random number from 100000000 and 2147483647
+      localStorage['_uid'] = _options['_uid'];
     }
 
     return _options;

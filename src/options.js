@@ -1,39 +1,29 @@
 $(document).ready(function() {
   var options = chrome.extension.getBackgroundPage().getOptions(),
-      load = function() {
+      saveLoad = function(saveOrLoad) {
         $.each(options,function(option,value) {
           input = $('#'+option);
-          if (!input)
+          if (option[0] == '_' || !input)
           {
             return;
           }
           if (input.attr('type') == 'checkbox')
           {
-            input.attr('checked', value);
+            saveOrLoad == 'load' ?
+              input.attr('checked', value) :
+              localStorage[option] = input.attr('checked') == 'checked';
           }
           else
           {
-            input.val(value);
+            saveOrLoad == 'load' ?
+              input.val(value) :
+              localStorage[option] = input.val();
           }
         });
       },
-      save = function() {
-        $.each(options, function(option,value) {
-          input = $('#'+option);
-          if (!input)
-          {
-            return;
-          }
-          if (input.attr('type') == 'checkbox')
-          {
-            localStorage[option] = input.attr('checked') == 'checked';
-          }
-          else
-          {
-            localStorage[option] = input.val();
-          }
-        });
-      };
+      load = function() { saveLoad('load'); },
+      save = function() { saveLoad('save'); }
+      ;
 
   load();
 
@@ -46,6 +36,7 @@ $(document).ready(function() {
   $('#reset').click(function(e) {
     e.preventDefault();
     $.each(options, function(option,value) {
+      if (option[0] == '_') return;
       localStorage.removeItem(option);
     });
     options = chrome.extension.getBackgroundPage().getOptions();

@@ -8,7 +8,7 @@ betterGB = function(options) {
       analyticsId = dev ? 'UA-28704123-2' : 'UA-28704123-1',
 
       gaqEvent = function(mesg) {
-        _gaq.push(['_trackEvent', mesg]);
+        //_gaq.push(['_trackEvent', mesg]);
       };
 
 
@@ -123,7 +123,7 @@ betterGB = function(options) {
 // Analytics
 //
 
-//gaTrack(analyticsId, 'none', '/bettergb.js');
+  tiny_ga(analyticsId, 'none', '/popup_open', options['_uid']);
 
 };
 

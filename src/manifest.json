@@ -1,6 +1,6 @@
 {
   "name": "BetterGB",
-  "version": "13",
+  "version": "14",
   "description": "Make the Google Bookmarks bookmarklet suck less. Remove extraneous UI elements, fix tabindex, and much more.",
   "update_url": "https://raw.github.com/lyoshenka/betterGB/master/updates.xml",
   "background_page": "background.html",
@@ -8,7 +8,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.google.com/bookmarks/mark*"], 
-      "js": ["jquery.min.js", "bettergb.js"],
+      "js": ["jquery.min.js", "tiny_ga.js", "bettergb.js"],
       "css": ["bettergb.css"],
       "run_at": "document_end"
     }
