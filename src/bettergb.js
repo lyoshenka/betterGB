@@ -6,10 +6,8 @@ betterGB = function(options) {
       extensionId = 'lkihgbnjeomjkfgdkimldpipggffikjo',
       dev = chrome.i18n.getMessage('@@extension_id') != extensionId, // true if developing, false if installed for real
       analyticsId = dev ? 'UA-28704123-2' : 'UA-28704123-1',
-
-      gaqEvent = function(mesg) {
-        //_gaq.push(['_trackEvent', mesg]);
-      };
+      ga = function(page) { tiny_ga(analyticsId,'none',page,options['_uid'], 'xhr'); }
+      ;
 
 
 //
@@ -23,7 +21,7 @@ betterGB = function(options) {
       if ((e.keyCode || e.which) == 13 && (!aclist.length || aclist.is(':empty')) && !$(e.target).is('textarea'))
       {
         e.preventDefault(); // is this line necessary?
-        gaqEvent('Submit: enter');
+        ga('/submit_enter');
         $(submitButton).click();
       }
       return true;
@@ -34,7 +32,7 @@ betterGB = function(options) {
   $(submitButton).keydown(function(e) {
     if((e.keyCode || e.which) == 13)
     {
-      gaqEvent('Submit: enter on button');
+      ga('/submit_button_enter');
       $(this).click();
     }
     return true;
@@ -43,7 +41,7 @@ betterGB = function(options) {
   $(submitButton).click(function(e) {
     if(e.hasOwnProperty('originalEvent'))
     {
-      gaqEvent('Submit: click');
+      ga('/submit_button_click');
     }
     return true;
   });
@@ -54,7 +52,7 @@ betterGB = function(options) {
     $(document).keydown(function(e) {
       if((e.keyCode || e.which) == 27) /* close popup on esc key */
       {
-        gaqEvent('Close via esc');
+        ga('/close_esc');
         window.close();
       }
     });
@@ -114,16 +112,11 @@ betterGB = function(options) {
   $(document.createElement('a'))
     .attr('href', chrome.extension.getURL('options.html'))
     .text('BetterGB Options')
-//    .css('float': 'left')
     .insertAfter('body > form');
 
 
 
-//
-// Analytics
-//
-
-  tiny_ga(analyticsId, 'none', '/popup_open', options['_uid']);
+  ga('/popup_open'); // analytics
 
 };
 
